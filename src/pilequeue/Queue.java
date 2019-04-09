@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pilascolaslistas;
+package pilequeue;
 
 /**
  *
  * @author User
  */
-public class Cola {
-    private Nodo cabeza;
+public class Queue {
+    private Node cabeza;
     private int tamanio;
-    private Nodo ultimo;
+    private Node ultimo;
     
-    public Cola(){
+    public Queue(){
         cabeza = null;
         tamanio = 0;
     }
 
-    public Nodo getCabeza() {
+    public Node getCabeza() {
         return cabeza;
     }
 
-    public void setCabeza(Nodo cabeza) {
+    public void setCabeza(Node cabeza) {
         this.cabeza = cabeza;
     }
 
@@ -36,8 +36,8 @@ public class Cola {
     }
     
     public void encolar(int numero){
-        Nodo nodo;
-        nodo = new Nodo(numero);
+        Node nodo;
+        nodo = new Node(numero);
         
         if(cabeza == null){
             cabeza = nodo; 
@@ -58,7 +58,7 @@ public class Cola {
         
         if(cabeza != null){
             if(cabeza.getNodoSgte() != null){
-                Nodo nodoAux;
+                Node nodoAux;
                 nodoAux = cabeza;
                 numero = nodoAux.getDato();
                 cabeza = nodoAux.getNodoSgte();

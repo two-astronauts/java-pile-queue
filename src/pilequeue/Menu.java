@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pilascolaslistas;
+package pilequeue;
 
 import java.util.Random;
 import javax.swing.table.DefaultTableModel;
@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Menu extends java.awt.Frame {
     
-    private Pila pila;
-    private Cola cola;
+    private Pile pila;
+    private Queue cola;
     private Random rand = new Random();
     DefaultTableModel modelPila;
     DefaultTableModel modelCola;
@@ -27,12 +27,12 @@ public class Menu extends java.awt.Frame {
         initComponents();
         this.setLocationRelativeTo(null);
         // pila
-        pila = new Pila();
+        pila = new Pile();
         this.modelPila = new DefaultTableModel();
         DatosPila.setModel(modelPila);
         modelPila.addColumn("Pila");
         // cola
-        cola = new Cola();
+        cola = new Queue();
         this.modelCola = new DefaultTableModel();
         DatosCola.setModel(modelCola);
         modelCola.addColumn("Cola");
@@ -74,7 +74,6 @@ public class Menu extends java.awt.Frame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setPreferredSize(new java.awt.Dimension(450, 450));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -167,9 +166,9 @@ public class Menu extends java.awt.Frame {
     }
     
     private void mostrarPila(){
-        Nodo cabeza;
+        Node cabeza;
         cabeza = this.pila.getCabeza();
-        Nodo nodoSiguiente;
+        Node nodoSiguiente;
         inicializarDatosPila();
         if(cabeza != null) {
             nodoSiguiente = cabeza;
@@ -208,9 +207,9 @@ public class Menu extends java.awt.Frame {
     }
     
     private void mostrarCola(){
-        Nodo cabeza;
+        Node cabeza;
         cabeza = this.cola.getCabeza();
-        Nodo nodoSiguiente;
+        Node nodoSiguiente;
         inicializarDatosCola();
         if(cabeza != null) {
             nodoSiguiente = cabeza;

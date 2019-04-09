@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pilascolaslistas;
+package pilequeue;
 
 /**
  *
  * @author User
  */
-public class Nodo {
-    private Nodo nodoSgte;
+public class Node {
+    private Node nodoSgte;
     private int dato;
     
-    public Nodo(int dato){
+    public Node(int dato){
         this.dato = dato;
     }
 
-    public Nodo getNodoSgte() {
+    public Node getNodoSgte() {
         return nodoSgte;
     }
 
-    public void setNodoSgte(Nodo nodoSgte) {
+    public void setNodoSgte(Node nodoSgte) {
         this.nodoSgte = nodoSgte;
     }
 
