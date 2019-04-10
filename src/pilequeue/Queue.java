@@ -42,13 +42,16 @@ public class Queue {
         if(cabeza == null){
             cabeza = nodo; 
             ultimo = cabeza;
+            tamanio++;
         }else{
             if(cabeza.getNodoSgte() == null){
                 cabeza.setNodoSgte(nodo);
                 ultimo = nodo;
+                tamanio++;
             }else{
                 ultimo.setNodoSgte(nodo);
                 ultimo = nodo;
+                tamanio++;
             }
         }
     }
@@ -63,10 +66,12 @@ public class Queue {
                 numero = nodoAux.getDato();
                 cabeza = nodoAux.getNodoSgte();
                 nodoAux.setNodoSgte(null);
+                tamanio--;
             }else{
                 numero = cabeza.getDato();
                 cabeza = null;
                 ultimo = null;
+                tamanio--;
             }
         }
         return numero;

@@ -53,13 +53,14 @@ public class Menu extends java.awt.Frame {
         btnDesapilar = new javax.swing.JButton();
         btnEncolar = new javax.swing.JButton();
         btnDesencolar = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnPilaCola = new javax.swing.JButton();
+        btnColaPila = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         DatosPila = new javax.swing.JTable();
         lblMensaje = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DatosCola = new javax.swing.JTable();
+        btnExit = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,6 +75,7 @@ public class Menu extends java.awt.Frame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        setPreferredSize(new java.awt.Dimension(450, 450));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -118,11 +120,21 @@ public class Menu extends java.awt.Frame {
         });
         add(btnDesencolar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 100, -1));
 
-        jButton8.setText("jButton8");
-        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 100, -1));
+        btnPilaCola.setText("Pila a Cola");
+        btnPilaCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPilaColaActionPerformed(evt);
+            }
+        });
+        add(btnPilaCola, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 100, -1));
 
-        jButton9.setText("jButton9");
-        add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 100, -1));
+        btnColaPila.setText("Cola a pila");
+        btnColaPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnColaPilaActionPerformed(evt);
+            }
+        });
+        add(btnColaPila, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 100, -1));
 
         DatosPila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,6 +160,14 @@ public class Menu extends java.awt.Frame {
         jScrollPane3.setViewportView(DatosCola);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 90, 290));
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,15 +196,12 @@ public class Menu extends java.awt.Frame {
                 this.modelPila.addRow(new String[]{Integer.toString(nodoSiguiente.getDato())});
                 nodoSiguiente = nodoSiguiente.getNodoSgte();
             }
-        }else{
-            lblMensaje.setText("No existen datos en la pila");
         }
     }
     
     private void btnApilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApilarActionPerformed
         int numero = 1 + rand.nextInt((100 - 1) + 1);
         this.pila.apilar(numero);
-        this.pila.setTamanio(this.pila.getTamanio() + 1);
         lblMensaje.setText("Se ha apilado el número: " + numero);
         mostrarPila();
     }//GEN-LAST:event_btnApilarActionPerformed
@@ -194,7 +211,6 @@ public class Menu extends java.awt.Frame {
             lblMensaje.setText("No existen datos para desapilar");
         }else {
             int numero = this.pila.desapilar();
-            this.pila.setTamanio(this.pila.getTamanio() - 1);
             lblMensaje.setText("Se ha desapilado el número: " + numero);
             mostrarPila();
         }
@@ -217,15 +233,12 @@ public class Menu extends java.awt.Frame {
                 this.modelCola.addRow(new String[]{Integer.toString(nodoSiguiente.getDato())});
                 nodoSiguiente = nodoSiguiente.getNodoSgte();
             }
-        }else{
-            lblMensaje.setText("No existen datos en la cola");
         }
     }
     
     private void btnEncolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncolarActionPerformed
         int numero = 1 + rand.nextInt((100 - 1) + 1);
         this.cola.encolar(numero);
-        this.cola.setTamanio(this.cola.getTamanio() + 1);
         lblMensaje.setText("Se ha encolado el número: " + numero);
         mostrarCola();
     }//GEN-LAST:event_btnEncolarActionPerformed
@@ -235,11 +248,40 @@ public class Menu extends java.awt.Frame {
             lblMensaje.setText("No existen datos para desencolar");
         }else {
             int numero = this.cola.desencolar();
-            this.cola.setTamanio(this.cola.getTamanio() - 1);
             lblMensaje.setText("Se ha desencolado el número: " + numero);
             mostrarCola();
         }
     }//GEN-LAST:event_btnDesencolarActionPerformed
+
+    private void btnPilaColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilaColaActionPerformed
+        if(this.pila.getCabeza() != null){
+            int numero;
+            numero = this.pila.desapilar();
+            this.cola.encolar(numero);
+            lblMensaje.setText("El número: " + numero + " se ha pasado de la pila a la cola");
+            mostrarCola();
+            mostrarPila();
+        }else{
+            lblMensaje.setText("No existen datos para intercambiar");
+        }
+    }//GEN-LAST:event_btnPilaColaActionPerformed
+
+    private void btnColaPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColaPilaActionPerformed
+        if(this.cola.getCabeza() != null){
+            int numero;
+            numero = this.cola.desencolar();
+            this.pila.apilar(numero);
+            lblMensaje.setText("El número: " + numero + " se ha pasado de la cola a la pila");
+            mostrarCola();
+            mostrarPila();
+        }else{
+            lblMensaje.setText("No existen datos para intercambiar");
+        }
+    }//GEN-LAST:event_btnColaPilaActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,11 +298,12 @@ public class Menu extends java.awt.Frame {
     private javax.swing.JTable DatosCola;
     private javax.swing.JTable DatosPila;
     private javax.swing.JButton btnApilar;
+    private javax.swing.JButton btnColaPila;
     private javax.swing.JButton btnDesapilar;
     private javax.swing.JButton btnDesencolar;
     private javax.swing.JButton btnEncolar;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnPilaCola;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

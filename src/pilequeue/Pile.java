@@ -42,9 +42,11 @@ public class Pile {
         if(cabeza == null){
             nodo.setNodoSgte(null);
             cabeza = nodo;
+            tamanio++;
         }else{
             nodo.setNodoSgte(cabeza);
             cabeza = nodo;
+            tamanio++;
         }
     }
     
@@ -57,9 +59,11 @@ public class Pile {
                 cabeza = cabeza.getNodoSgte();
                 nodoAux.setNodoSgte(null);
                 numero = nodoAux.getDato();
+                tamanio--;
             }else {
                 numero = cabeza.getDato();
                 cabeza = null;
+                tamanio--;
             }
         }else {
             numero = 0;
